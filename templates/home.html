@@ -1,38 +1,39 @@
-<h1>Welcome to SmartStudyManager</h1>
+{% extends "base.html" %}
 
-<a href="/add/">Add New Study Task </a>
-<br>
+{% block content %}
 
-<h2>Dashboard Status</h2>
-<p>Total Tasks: {{ total_tasks }}</p>
-<p>Completed Tasks: {{ completed_tasks }}</p>
-<p>Progress: {{ progress }}%</p>
-<hr>
+<h2>Dashboard</h2>
+
+<div class="card p-3 mb-3">
+    <h5>Statistics</h5>
+    <p>Total Tasks: {{ total_tasks }}</p>
+    <p>Completed Tasks: {{ completed_tasks }}</p>
+    <p>Progress: {{ progress }}%</p>
+</div>
+
+<a href="/add/" class="btn btn-primary mb-3">Add New Task</a>
+
 {% for task in tasks %}
-    <div>
-        <h3>
+<div class="card mb-3 p-3">
+    <h5>
         {% if task.completed %}
             <s>{{ task.title }}</s>
         {% else %}
             {{ task.title }}
         {% endif %}
-        </h3>
+    </h5>
 
-        <p>{{ task.description }}</p>
-        <p>Deadline: {{ task.deadline }}</p>
+    <p>{{ task.description }}</p>
+    <p><strong>Deadline:</strong> {{ task.deadline }}</p>
 
-        {% if not task.completed %}
-            <a href="/complete/{{ task.id }}/">Mark as Complete</a>
-        {% endif %}
-        <br><br>
+    {% if not task.completed %}
+        <a href="/complete/{{ task.id }}/" class="btn btn-success btn-sm">Mark Complete</a>
+    {% endif %}
 
-        <a href="/delete/{{ task.id }}/">Delete Task</a>
-        <hr>
-        
-    </div>
+    <a href="/delete/{{ task.id }}/" class="btn btn-danger btn-sm">Delete</a>
+</div>
 {% empty %}
-    <p>No study tasks found. Start by adding a new task!</p>
+<p>No tasks yet.</p>
 {% endfor %}
 
-<br>
-<a href="/accounts/logout/">Logout</a>
+{% endblock %}
