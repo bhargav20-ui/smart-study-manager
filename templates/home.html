@@ -12,6 +12,22 @@
 </div>
 
 <a href="/add/" class="btn btn-primary mb-3">Add New Task</a>
+<form method="get" class="row mb-3">
+        <div class="col-md-4">
+            <input type="text" name="q" class="form-control" placeholder="Search tasks...">
+        </div>
+        <div class="col-md-3">
+            <select name="status" class="form-select">
+                <option value="">All</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-secondary">Filter</button>
+        </div>
+</form>
 
 {% for task in tasks %}
 <div class="card mb-3 p-3">

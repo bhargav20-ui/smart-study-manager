@@ -3,11 +3,25 @@ from .forms import StudyTaskForm
 from .models import StudyTask
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 # Create your views here.
 @login_required
 def home(request):
+    query = request.GET.get('q')
+    filter_status = request.GET.get('status')
+
     tasks = StudyTask.objects.filter(user=request.user)
+
+    if query:
+        tasks = tasks.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+            )
+
+    if filter_status == 'completed':
+        tasks = tasks.filter(completed=True)
+    elif filter_status == 'pending':
+        tasks = tasks.filter(completed=False)
 
     total_tasks = tasks.count()
     completed_tasks = tasks.filter(completed=True).count()
