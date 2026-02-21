@@ -1,0 +1,19 @@
+<h1>Welcome to SmartStudyManager</h1>
+
+<a href="/add/">Add New Study Task </a>
+<br><br>
+
+{% for task in tasks %}
+    <div>
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <p>Deadline: {{ task.deadline }}</p>
+        <p>Status: {{ task.complete }}</p>
+        <hr>
+    </div>
+{% empty %}
+    <p>No study tasks found. Start by adding a new task!</p>
+{% endfor %}
+
+<br>
+<a href="/accounts/logout/">Logout</a>
