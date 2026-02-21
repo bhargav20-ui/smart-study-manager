@@ -1,15 +1,34 @@
 <h1>Welcome to SmartStudyManager</h1>
 
 <a href="/add/">Add New Study Task </a>
-<br><br>
+<br>
 
+<h2>Dashboard Status</h2>
+<p>Total Tasks: {{ total_tasks }}</p>
+<p>Completed Tasks: {{ completed_tasks }}</p>
+<p>Progress: {{ progress }}%</p>
+<hr>
 {% for task in tasks %}
     <div>
-        <h3>{{ task.title }}</h3>
+        <h3>
+        {% if task.completed %}
+            <s>{{ task.title }}</s>
+        {% else %}
+            {{ task.title }}
+        {% endif %}
+        </h3>
+
         <p>{{ task.description }}</p>
         <p>Deadline: {{ task.deadline }}</p>
-        <p>Status: {{ task.complete }}</p>
+
+        {% if not task.completed %}
+            <a href="/complete/{{ task.id }}/">Mark as Complete</a>
+        {% endif %}
+        <br><br>
+
+        <a href="/delete/{{ task.id }}/">Delete Task</a>
         <hr>
+        
     </div>
 {% empty %}
     <p>No study tasks found. Start by adding a new task!</p>

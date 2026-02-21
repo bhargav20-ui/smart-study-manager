@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from core.views import add_task, home
+from core.views import add_task, home, complete_task, delete_task
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('add/', add_task, name='add_task'),
+    path('complete/<int:task_id>/', complete_task, name='complete_task'),
+    path('delete/<int:task_id>/', delete_task, name='delete_task'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
