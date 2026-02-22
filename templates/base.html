@@ -13,7 +13,12 @@
     <div class="ms-auto">
       {% if user.is_authenticated %}
         <a href="/dashboard/" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
-        <a href="/accounts/logout/" class="btn btn-danger btn-sm">Logout</a>
+        {% if user.is_authenticated %}
+<form action="{% url 'logout' %}" method="post" class="d-inline">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+</form>
+{% endif %}
       {% else %}
         <a href="/accounts/login/" class="btn btn-outline-light btn-sm me-2">Login</a>
         <a href="/register/" class="btn btn-success btn-sm">Register</a>

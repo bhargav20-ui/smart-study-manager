@@ -37,21 +37,26 @@
 {% for task in tasks %}
 <div class="card mb-3 p-3">
     <h5>
-        {% if task.completed %}
-            <s>{{ task.title }}</s>
-        {% else %}
-            {{ task.title }}
-        {% endif %}
+        <a href="/toggle/{{ task.id }}/"
+   class="btn {% if task.completed %}btn-warning{% else %}btn-success{% endif %} btn-sm">
+   {% if task.completed %}
+       Undo
+   {% else %}
+       Complete
+   {% endif %}
+</a>
     </h5>
 
     <p>{{ task.description }}</p>
     <p><strong>Deadline:</strong> {{ task.deadline }}</p>
 
-    {% if not task.completed %}
-        <a href="/complete/{{ task.id }}/" class="btn btn-success btn-sm">Mark Complete</a>
-    {% endif %}
-
-    <a href="/delete/{{ task.id }}/" class="btn btn-danger btn-sm">Delete</a>
+    <form action="/delete/{{ task.id }}/" method="post" class="d-inline">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm"
+            onclick="return confirm('Are you sure you want to delete this task?');">
+        Delete
+    </button>
+</form>
 </div>
 {% empty %}
 <p>No tasks yet.</p>
