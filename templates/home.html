@@ -4,11 +4,14 @@
 
 <h2>Dashboard</h2>
 
-<div class="card p-3 mb-3">
-    <h5>Statistics</h5>
-    <p>Total Tasks: {{ total_tasks }}</p>
-    <p>Completed Tasks: {{ completed_tasks }}</p>
-    <p>Progress: {{ progress }}%</p>
+<div class="progress mb-3">
+  <div class="progress-bar" role="progressbar" 
+       style="width: {{ progress }}%;" 
+       aria-valuenow="{{ progress }}" 
+       aria-valuemin="0" 
+       aria-valuemax="100">
+    {{ progress }}%
+  </div>
 </div>
 
 <a href="/add/" class="btn btn-primary mb-3">Add New Task</a>
