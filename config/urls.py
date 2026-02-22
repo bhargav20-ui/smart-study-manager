@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from core.views import register, add_task, home, complete_task, delete_task
+from core.views import landing, dashboard, register, add_task, home, complete_task, delete_task
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', landing, name='landing'),
+    path('dashboard/', dashboard, name='dashboard'),
     path('register/', register, name='register'),
     path('add/', add_task, name='add_task'),
     path('complete/<int:task_id>/', complete_task, name='complete_task'),

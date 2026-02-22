@@ -14,7 +14,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('dashboard')
         
     else:
         form = RegisterForm()
@@ -22,7 +22,7 @@ def register(request):
 
 # Create your views here.
 @login_required
-def home(request):
+def dashboard(request):
     query = request.GET.get('q')
     filter_status = request.GET.get('status')
 
@@ -62,7 +62,7 @@ def add_task(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
-            return redirect('home')
+            return redirect('dashboard')
     else:
         form = StudyTaskForm()
     return render(request, 'add_task.html', {'form': form})
@@ -72,10 +72,13 @@ def complete_task(request, task_id):
     task = get_object_or_404(StudyTask, id=task_id, user=request.user)
     task.completed = True
     task.save()
-    return redirect('home')
+    return redirect('dashboard')
 
 @login_required
 def delete_task(request, task_id):
     task = get_object_or_404(StudyTask, id=task_id, user=request.user)
     task.delete()
-    return redirect('home')
+    return redirect('dashboard')
+
+def landing(request):
+    return render(request, "landing.html")
