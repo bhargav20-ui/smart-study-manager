@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Profile</h2>
+
+<div class="card p-4 mb-4">
+  <h5>User Information</h5>
+  <p><strong>Username:</strong> {{ user.username }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Date Joined:</strong> {{ user.date_joined|date:"M d, Y" }}</p>
+</div>
+
+<div class="card p-4">
+  <h5>Task Statistics</h5>
+  <p>Total Tasks: {{ total_tasks }}</p>
+  <p>Completed Tasks: {{ completed_tasks }}</p>
+
+  <div class="progress">
+    <div class="progress-bar"
+         role="progressbar"
+         style="width: {{ progress }}%;">
+      {{ progress }}%
+    </div>
+  </div>
+</div>
+
+{% endblock %}

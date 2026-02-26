@@ -45,6 +45,10 @@
         {% endif %}
     </h5>
     <p>{{ task.description }}</p>
+    <p class="text-muted small">
+        Created on {{ task.created_at|date:"M d, Y H:i" }}
+        • {{ task.created_at|timesince }} ago
+    </p>
     <p><strong>Deadline:</strong> {{ task.deadline }}</p>
 
 <a href="/toggle/{{ task.id }}/"

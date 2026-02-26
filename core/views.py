@@ -91,3 +91,17 @@ def toggle_task(request, task_id):
     task.completed = not task.completed
     task.save()
     return redirect('dashboard')
+
+@login_required
+def profile(request):
+    tasks = StudyTask.objects.filter(user=request.user)
+    total_tasks = tasks.count()
+    completed_tasks = tasks.filter(completed=True).count()
+    progress = int((completed_tasks / total_tasks) * 100) if total_tasks > 0 else 0
+
+    context = {
+        "total_tasks": total_tasks,
+        "completed_tasks": completed_tasks,
+        "progress": progress,
+    }
+    return render(request, "profile.html", context)
