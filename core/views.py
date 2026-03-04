@@ -105,3 +105,17 @@ def profile(request):
         "progress": progress,
     }
     return render(request, "profile.html", context)
+
+@login_required
+def edit_task(request, task_id):
+    task = get_object_or_404(StudyTask, id=task_id, user=request.user)
+
+    if request.method == "POST":
+        form = StudyTaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = StudyTaskForm(instance=task)
+
+    return render(request, "edit_task.html", {"form": form})

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from core.views import landing, profile, dashboard, register, add_task, complete_task, delete_task, toggle_task
+from core.views import landing, profile, dashboard, register, add_task, complete_task, delete_task, toggle_task, edit_task
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,6 @@ urlpatterns = [
     path('complete/<int:task_id>/', complete_task, name='complete_task'),
     path('toggle/<int:task_id>/', toggle_task, name='toggle_task'),
     path('delete/<int:task_id>/', delete_task, name='delete_task'),
+    path('edit/<int:task_id>/', edit_task, name='edit_task'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
