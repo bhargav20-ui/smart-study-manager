@@ -31,4 +31,5 @@ urlpatterns = [
     path('delete/<int:task_id>/', delete_task, name='delete_task'),
     path('edit/<int:task_id>/', edit_task, name='edit_task'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('core.urls')),
 ]
