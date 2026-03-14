@@ -1,44 +1,23 @@
 body{
-background:#f5f7fb;
-font-family:Segoe UI;
+font-family:Arial;
+background:#f4f4f4;
 }
 
-.auth-box{
-
-width:400px;
-margin:auto;
-margin-top:80px;
-
-background:white;
-padding:40px;
-
-border-radius:12px;
-
-box-shadow:0 8px 25px rgba(0,0,0,0.1);
-}
-
-.auth-box input{
-
-width:100%;
+nav{
+background:#333;
 padding:10px;
-margin-bottom:15px;
-
-border:1px solid #ddd;
-border-radius:6px;
 }
 
-.task-card{
+nav a{
+color:white;
+margin-right:10px;
+text-decoration:none;
+}
 
+.container{
+width:70%;
+margin:auto;
 background:white;
-
 padding:20px;
-margin-bottom:15px;
-
-border-radius:10px;
-
-box-shadow:0 4px 15px rgba(0,0,0,0.05);
-}
-
-.task-buttons{
-margin-top:10px;
+margin-top:20px;
 }

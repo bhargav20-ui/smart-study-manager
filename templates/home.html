@@ -4,46 +4,36 @@
 
 <h2>Dashboard</h2>
 
-<p>Total Tasks: {{ total_tasks }}</p>
-<p>Completed Tasks: {{ completed_tasks }}</p>
+<a href="/add/">Add Task</a>
 
-<div class="progress mb-3">
-<div class="progress-bar bg-success"
-style="width:{{progress}}%">
-{{progress}}%
-</div>
-</div>
+<h3>Progress: {{ progress }}%</h3>
 
-<a href="/add/" class="btn btn-primary mb-3">
-Add Task
-</a>
+<ul>
 
 {% for task in tasks %}
 
-<div class="task-card">
+<li>
 
-<h5>{{task.title}}</h5>
+<b>{{ task.title }}</b>
 
-<p>{{task.description}}</p>
+{% if task.completed %}
+✔
+{% endif %}
 
-<div class="task-buttons">
+<br>
 
-<a href="/edit/{{task.id}}" class="btn btn-warning btn-sm">
-Edit
-</a>
+{{ task.description }}
 
-<a href="/toggle/{{task.id}}" class="btn btn-success btn-sm">
-Complete
-</a>
+<br>
 
-<a href="/delete/{{task.id}}" class="btn btn-danger btn-sm">
-Delete
-</a>
+<a href="/toggle/{{ task.id }}/">Toggle</a>
+<a href="/edit/{{ task.id }}/">Edit</a>
+<a href="/delete/{{ task.id }}/">Delete</a>
 
-</div>
-
-</div>
+</li>
 
 {% endfor %}
+
+</ul>
 
 {% endblock %}

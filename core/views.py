@@ -7,23 +7,22 @@ from .models import StudyTask
 
 
 def landing(request):
-    return render(request,"landing.html")
+    return render(request, "landing.html")
 
 
 def register(request):
-
     if request.method == "POST":
         form = RegisterForm(request.POST)
 
         if form.is_valid():
             user = form.save()
-            login(request,user)
+            login(request, user)
             return redirect("dashboard")
 
     else:
         form = RegisterForm()
 
-    return render(request,"register.html",{"form":form})
+    return render(request, "register.html", {"form": form})
 
 
 @login_required
@@ -35,26 +34,22 @@ def dashboard(request):
 
     if query:
         tasks = tasks.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query)
+            Q(title__icontains=query) | Q(description__icontains=query)
         )
 
     total_tasks = tasks.count()
     completed_tasks = tasks.filter(completed=True).count()
 
-    progress = 0
-
-    if total_tasks > 0:
-        progress = int((completed_tasks/total_tasks)*100)
+    progress = int((completed_tasks / total_tasks) * 100) if total_tasks > 0 else 0
 
     context = {
-        "tasks":tasks,
-        "total_tasks":total_tasks,
-        "completed_tasks":completed_tasks,
-        "progress":progress
+        "tasks": tasks,
+        "total_tasks": total_tasks,
+        "completed_tasks": completed_tasks,
+        "progress": progress,
     }
 
-    return render(request,"home.html",context)
+    return render(request, "home.html", context)
 
 
 @login_required
@@ -73,24 +68,16 @@ def add_task(request):
     else:
         form = StudyTaskForm()
 
-    return render(request,"add_task.html",{"form":form})
+    return render(request, "add_task.html", {"form": form})
 
 
 @login_required
-def edit_task(request,task_id):
+def edit_task(request, task_id):
 
-    task = get_object_or_404(
-        StudyTask,
-        id=task_id,
-        user=request.user
-    )
+    task = get_object_or_404(StudyTask, id=task_id, user=request.user)
 
     if request.method == "POST":
-
-        form = StudyTaskForm(
-            request.POST,
-            instance=task
-        )
+        form = StudyTaskForm(request.POST, instance=task)
 
         if form.is_valid():
             form.save()
@@ -99,31 +86,22 @@ def edit_task(request,task_id):
     else:
         form = StudyTaskForm(instance=task)
 
-    return render(request,"edit_task.html",{"form":form})
+    return render(request, "edit_task.html", {"form": form})
 
 
 @login_required
-def delete_task(request,task_id):
+def delete_task(request, task_id):
 
-    task = get_object_or_404(
-        StudyTask,
-        id=task_id,
-        user=request.user
-    )
-
+    task = get_object_or_404(StudyTask, id=task_id, user=request.user)
     task.delete()
 
     return redirect("dashboard")
 
 
 @login_required
-def toggle_task(request,task_id):
+def toggle_task(request, task_id):
 
-    task = get_object_or_404(
-        StudyTask,
-        id=task_id,
-        user=request.user
-    )
+    task = get_object_or_404(StudyTask, id=task_id, user=request.user)
 
     task.completed = not task.completed
     task.save()
@@ -139,15 +117,12 @@ def profile(request):
     total_tasks = tasks.count()
     completed_tasks = tasks.filter(completed=True).count()
 
-    progress = 0
-
-    if total_tasks > 0:
-        progress = int((completed_tasks/total_tasks)*100)
+    progress = int((completed_tasks / total_tasks) * 100) if total_tasks > 0 else 0
 
     context = {
-        "total_tasks":total_tasks,
-        "completed_tasks":completed_tasks,
-        "progress":progress
+        "total_tasks": total_tasks,
+        "completed_tasks": completed_tasks,
+        "progress": progress,
     }
 
-    return render(request,"profile.html",context)
+    return render(request, "profile.html", context)

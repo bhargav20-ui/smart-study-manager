@@ -2,23 +2,16 @@
 
 {% block content %}
 
-<h2>Profile</h2>
+<h2>Edit Task</h2>
 
-<p><strong>Username:</strong> {{user.username}}</p>
-<p><strong>Email:</strong> {{user.email}}</p>
+<form method="post">
 
-<p>Total Tasks: {{total_tasks}}</p>
-<p>Completed: {{completed_tasks}}</p>
+{% csrf_token %}
 
-<div class="progress">
+{{ form.as_p }}
 
-<div class="progress-bar"
-style="width:{{progress}}%">
+<button type="submit">Update</button>
 
-{{progress}}%
-
-</div>
-
-</div>
+</form>
 
 {% endblock %}
