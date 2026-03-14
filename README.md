@@ -62,6 +62,7 @@ Live Demo: https://smart-study-manager.onrender.com/
 - HTML
 - CSS
 - Bootstrap
+- JavaScript
 
 ## Deployment & Tools
 - Gunicorn
