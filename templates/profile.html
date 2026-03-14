@@ -2,23 +2,21 @@
 
 {% block content %}
 
-<h2 class="mb-4">Profile</h2>
+<h2>Profile</h2>
 
-<div class="card shadow-sm p-4">
+<p><strong>Username:</strong> {{user.username}}</p>
+<p><strong>Email:</strong> {{user.email}}</p>
 
-<p><strong>Username:</strong> {{ user.username }}</p>
-<p><strong>Email:</strong> {{ user.email }}</p>
-<p><strong>Joined:</strong> {{ user.date_joined|date:"M d, Y" }}</p>
-
-<hr>
-
-<p>Total Tasks: {{ total_tasks }}</p>
-<p>Completed Tasks: {{ completed_tasks }}</p>
+<p>Total Tasks: {{total_tasks}}</p>
+<p>Completed: {{completed_tasks}}</p>
 
 <div class="progress">
-<div class="progress-bar bg-success" style="width: {{ progress }}%">
-{{ progress }}%
-</div>
+
+<div class="progress-bar"
+style="width:{{progress}}%">
+
+{{progress}}%
+
 </div>
 
 </div>

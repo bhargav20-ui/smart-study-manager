@@ -2,18 +2,18 @@
 
 {% block content %}
 
-<div class="card shadow-sm p-4 mx-auto" style="max-width:600px">
-
-<h3 class="mb-3">Add Task</h3>
+<h2>Add Task</h2>
 
 <form method="post">
+
 {% csrf_token %}
+
 {{ form.as_p }}
 
-<button class="btn btn-primary">Save Task</button>
+<button class="btn btn-primary">
+Save Task
+</button>
 
 </form>
-
-</div>
 
 {% endblock %}

@@ -2,107 +2,30 @@
 
 {% block content %}
 
-<div class="d-flex justify-content-center align-items-center" style="min-height:80vh;">
+<div class="auth-box">
 
-<div class="card shadow p-4" style="width:420px; border-radius:12px;">
-
-<h3 class="text-center mb-4">Create your account</h3>
+<h2>Create Account</h2>
 
 <form method="post">
 
 {% csrf_token %}
 
-<div class="mb-3">
-<label class="form-label">Username</label>
 {{ form.username }}
-</div>
-
-<div class="mb-3">
-<label class="form-label">Email address</label>
 {{ form.email }}
-</div>
-
-<div class="mb-3 position-relative">
-<label class="form-label">Password</label>
 {{ form.password1 }}
-
-<span onclick="togglePassword()" 
-style="position:absolute; right:12px; top:38px; cursor:pointer;">
-👁
-</span>
-
-</div>
-
-<div class="progress mb-2" style="height:6px;">
-<div id="strengthBar" class="progress-bar"></div>
-</div>
-
-<small id="strengthText"></small>
-
-<div class="mb-3 mt-3">
-<label class="form-label">Confirm Password</label>
 {{ form.password2 }}
-</div>
 
-<button class="btn btn-primary w-100 py-2">
+<button class="btn btn-primary w-100 mt-3">
 Create Account
 </button>
 
 </form>
 
-<p class="text-center mt-3 mb-0">
+<p class="mt-3 text-center">
 Already have an account?
 <a href="/accounts/login/">Login</a>
 </p>
 
 </div>
-</div>
-
-<script>
-
-const passwordInput = document.getElementById("id_password1");
-const strengthBar = document.getElementById("strengthBar");
-const strengthText = document.getElementById("strengthText");
-
-passwordInput.addEventListener("input", function(){
-
-let password = passwordInput.value;
-let score = 0;
-
-if(password.length >= 8) score++;
-if(/[A-Z]/.test(password)) score++;
-if(/[a-z]/.test(password)) score++;
-if(/[0-9]/.test(password)) score++;
-if(/[!@#$%^&*]/.test(password)) score++;
-
-if(score <= 2){
-strengthBar.style.width = "33%";
-strengthBar.className = "progress-bar bg-danger";
-strengthText.innerText = "Weak password";
-}
-else if(score <= 4){
-strengthBar.style.width = "66%";
-strengthBar.className = "progress-bar bg-warning";
-strengthText.innerText = "Medium strength password";
-}
-else{
-strengthBar.style.width = "100%";
-strengthBar.className = "progress-bar bg-success";
-strengthText.innerText = "Strong password";
-}
-
-});
-
-function togglePassword(){
-const pass = document.getElementById("id_password1");
-
-if(pass.type === "password"){
-pass.type = "text";
-}else{
-pass.type = "password";
-}
-}
-
-</script>
 
 {% endblock %}

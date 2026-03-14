@@ -2,63 +2,43 @@
 
 {% block content %}
 
-<h2 class="mb-4">Dashboard</h2>
+<h2>Dashboard</h2>
 
-<div class="row mb-4">
+<p>Total Tasks: {{ total_tasks }}</p>
+<p>Completed Tasks: {{ completed_tasks }}</p>
 
-<div class="col-md-4">
-<div class="card stat-card shadow-sm">
-<div class="card-body">
-<h6>Total Tasks</h6>
-<h3>{{ total_tasks }}</h3>
-</div>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card stat-card shadow-sm">
-<div class="card-body">
-<h6>Completed</h6>
-<h3>{{ completed_tasks }}</h3>
-</div>
+<div class="progress mb-3">
+<div class="progress-bar bg-success"
+style="width:{{progress}}%">
+{{progress}}%
 </div>
 </div>
 
-<div class="col-md-4">
-<div class="card stat-card shadow-sm">
-<div class="card-body">
-<h6>Progress</h6>
-<h3>{{ progress }}%</h3>
-</div>
-</div>
-</div>
-
-</div>
-
-<a href="/add/" class="btn btn-primary mb-4">Add Task</a>
+<a href="/add/" class="btn btn-primary mb-3">
+Add Task
+</a>
 
 {% for task in tasks %}
 
-<div class="card task-card mb-3 shadow-sm">
+<div class="task-card">
 
-<div class="card-body">
+<h5>{{task.title}}</h5>
 
-<h5>{{ task.title }}</h5>
+<p>{{task.description}}</p>
 
-<p class="text-muted">{{ task.description }}</p>
+<div class="task-buttons">
 
-<div class="d-flex gap-2">
+<a href="/edit/{{task.id}}" class="btn btn-warning btn-sm">
+Edit
+</a>
 
-<a href="/edit/{{task.id}}/" class="btn btn-warning btn-sm">Edit</a>
+<a href="/toggle/{{task.id}}" class="btn btn-success btn-sm">
+Complete
+</a>
 
-<a href="/toggle/{{task.id}}/" class="btn btn-success btn-sm">Complete</a>
-
-<form method="post" action="/delete/{{task.id}}/">
-{% csrf_token %}
-<button class="btn btn-danger btn-sm">Delete</button>
-</form>
-
-</div>
+<a href="/delete/{{task.id}}" class="btn btn-danger btn-sm">
+Delete
+</a>
 
 </div>
 
