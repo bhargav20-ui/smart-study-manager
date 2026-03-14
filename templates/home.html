@@ -7,27 +7,27 @@
 <div class="row mb-4">
 
 <div class="col-md-4">
-<div class="card shadow-sm">
-<div class="card-body text-center">
-<h5>Total Tasks</h5>
+<div class="card stat-card shadow-sm">
+<div class="card-body">
+<h6>Total Tasks</h6>
 <h3>{{ total_tasks }}</h3>
 </div>
 </div>
 </div>
 
 <div class="col-md-4">
-<div class="card shadow-sm">
-<div class="card-body text-center">
-<h5>Completed</h5>
+<div class="card stat-card shadow-sm">
+<div class="card-body">
+<h6>Completed</h6>
 <h3>{{ completed_tasks }}</h3>
 </div>
 </div>
 </div>
 
 <div class="col-md-4">
-<div class="card shadow-sm">
-<div class="card-body text-center">
-<h5>Progress</h5>
+<div class="card stat-card shadow-sm">
+<div class="card-body">
+<h6>Progress</h6>
 <h3>{{ progress }}%</h3>
 </div>
 </div>
@@ -35,26 +35,17 @@
 
 </div>
 
-<div class="progress mb-4">
-<div class="progress-bar bg-success" style="width: {{ progress }}%">
-</div>
-</div>
-
-<a href="/add/" class="btn btn-primary mb-4">
-<i class="bi bi-plus-circle"></i> Add Task
-</a>
+<a href="/add/" class="btn btn-primary mb-4">Add Task</a>
 
 {% for task in tasks %}
 
-<div class="card mb-3 shadow-sm">
+<div class="card task-card mb-3 shadow-sm">
+
 <div class="card-body">
 
 <h5>{{ task.title }}</h5>
-<p>{{ task.description }}</p>
 
-<p class="text-muted small">
-Created {{ task.created_at|timesince }} ago
-</p>
+<p class="text-muted">{{ task.description }}</p>
 
 <div class="d-flex gap-2">
 
@@ -70,11 +61,8 @@ Created {{ task.created_at|timesince }} ago
 </div>
 
 </div>
+
 </div>
-
-{% empty %}
-
-<p>No tasks yet.</p>
 
 {% endfor %}
 
