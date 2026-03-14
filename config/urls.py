@@ -22,6 +22,8 @@ from core.views import landing, profile, dashboard, register, add_task, complete
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', landing, name='landing'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('core.urls')),    
     path('profile/', profile, name='profile'),
     path('dashboard/', dashboard, name='dashboard'),
     path('register/', register, name='register'),
@@ -30,6 +32,4 @@ urlpatterns = [
     path('toggle/<int:task_id>/', toggle_task, name='toggle_task'),
     path('delete/<int:task_id>/', delete_task, name='delete_task'),
     path('edit/<int:task_id>/', edit_task, name='edit_task'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('core.urls')),
 ]
