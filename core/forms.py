@@ -26,7 +26,6 @@ class RegisterForm(UserCreationForm):
         self.fields['username'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Username'
-            'style':'padding:10px;border-radius:6px'
         })
 
         self.fields['email'].widget.attrs.update({
