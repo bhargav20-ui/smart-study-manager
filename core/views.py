@@ -97,6 +97,12 @@ def delete_task(request, task_id):
 
     return redirect("dashboard")
 
+@login_required
+def complete_task(request, task_id):
+    task = get_object_or_404(StudyTask, id=task_id, user=request.user)
+    task.completed = True
+    task.save()
+    return redirect('dashboard')
 
 @login_required
 def toggle_task(request, task_id):
