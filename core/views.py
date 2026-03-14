@@ -12,13 +12,13 @@ def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save()   # IMPORTANT: do not use commit=False
             login(request, user)
-            return redirect('dashboard')
-        
+            return redirect("dashboard")
     else:
         form = RegisterForm()
-    return render(request, 'register.html', {'form': form})
+
+    return render(request, "register.html", {"form": form})
 
 # Create your views here.
 @login_required
