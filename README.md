@@ -113,7 +113,7 @@ SmartStudyManager
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/smart-study-manager.git
+git clone https://github.com/bhargav20-ui/smart-study-manager/.git
 cd smart-study-manager
 ```
 
