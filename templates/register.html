@@ -2,47 +2,59 @@
 
 {% block content %}
 
-<div class="card auth-card shadow p-4">
+<div class="d-flex justify-content-center align-items-center" style="min-height:80vh;">
 
-<h3 class="text-center mb-4">Create Account</h3>
+<div class="card shadow p-4" style="width:420px; border-radius:12px;">
+
+<h3 class="text-center mb-4">Create your account</h3>
 
 <form method="post" onsubmit="return validatePassword()">
 
 {% csrf_token %}
 
-<div class="mb-3">
-<label>Username</label>
-{{ form.username }}
+<div class="form-floating mb-3">
+    {{ form.username }}
+    <label>Username</label>
 </div>
 
-<div class="mb-3">
-<label>Email</label>
-{{ form.email }}
+<div class="form-floating mb-3">
+    {{ form.email }}
+    <label>Email address</label>
 </div>
 
-<div class="mb-3">
-<label>Password</label>
-{{ form.password1 }}
-<div class="progress mt-2" style="height:6px;">
+<div class="form-floating mb-3 position-relative">
+    {{ form.password1 }}
+    <label>Password</label>
+
+    <span onclick="togglePassword()" 
+    style="position:absolute; right:15px; top:18px; cursor:pointer;">
+    👁
+    </span>
+</div>
+
+<div class="progress mb-2" style="height:6px;">
 <div id="strengthBar" class="progress-bar"></div>
 </div>
+
 <small id="strengthText"></small>
+
+<div class="form-floating mb-3 mt-3">
+    {{ form.password2 }}
+    <label>Confirm Password</label>
 </div>
 
-<div class="mb-3">
-<label>Confirm Password</label>
-{{ form.password2 }}
-</div>
-
-<button class="btn btn-success w-100">Register</button>
+<button class="btn btn-primary w-100 py-2">
+Create Account
+</button>
 
 </form>
 
-<p class="text-center mt-3">
+<p class="text-center mt-3 mb-0">
 Already have an account?
 <a href="/accounts/login/">Login</a>
 </p>
 
+</div>
 </div>
 
 <script>
@@ -60,7 +72,7 @@ if(password.length >= 8) score++;
 if(/[A-Z]/.test(password)) score++;
 if(/[a-z]/.test(password)) score++;
 if(/[0-9]/.test(password)) score++;
-if(/[!@#$%^&*(),.?":{}|<>]/.test(password)) score++;
+if(/[!@#$%^&*]/.test(password)) score++;
 
 if(score <= 2){
 strengthBar.style.width = "33%";
@@ -82,39 +94,25 @@ strengthText.innerText = "Strong password";
 
 });
 
+function togglePassword(){
+
+const pass = document.getElementById("id_password1");
+
+if(pass.type === "password"){
+pass.type = "text";
+}else{
+pass.type = "password";
+}
+
+}
 
 function validatePassword(){
 
 let password = document.getElementById("id_password1").value;
 let confirm = document.getElementById("id_password2").value;
 
-let upper = /[A-Z]/;
-let lower = /[a-z]/;
-let number = /[0-9]/;
-let special = /[!@#$%^&*(),.?":{}|<>]/;
-
 if(password.length < 8){
-alert("Password must contain at least 8 characters.");
-return false;
-}
-
-if(!upper.test(password)){
-alert("Password must contain at least one uppercase letter.");
-return false;
-}
-
-if(!lower.test(password)){
-alert("Password must contain at least one lowercase letter.");
-return false;
-}
-
-if(!number.test(password)){
-alert("Password must contain at least one number.");
-return false;
-}
-
-if(!special.test(password)){
-alert("Password must contain at least one special character.");
+alert("Password must be at least 8 characters.");
 return false;
 }
 
