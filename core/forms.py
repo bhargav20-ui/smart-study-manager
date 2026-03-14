@@ -1,7 +1,7 @@
 from django import forms
+from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.utils import timezone
 from .models import StudyTask
 
 
@@ -19,14 +19,17 @@ class StudyTaskForm(forms.ModelForm):
         model = StudyTask
         fields = ["title", "description", "deadline"]
         widgets = {
-            "deadline": forms.DateInput(attrs={"type": "date"})
-        }
-
+            "deadline": forms.DateInput(attrs={"type": "date"}),
+            "description": forms.Textarea(attrs={"rows":3})
+            }
+        
     def clean_deadline(self):
         deadline = self.cleaned_data.get("deadline")
         today = timezone.now().date()
 
         if deadline and deadline < today:
-            raise forms.ValidationError("Deadline cannot be in the past.")
+            raise forms.ValidationError(
+                "Deadline cannot be a past date."
+            )
 
         return deadline

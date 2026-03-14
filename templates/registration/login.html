@@ -2,24 +2,44 @@
 
 {% block content %}
 
+<div class="auth-wrapper">
+
+<div class="auth-card">
+
 <h2>Login</h2>
 
 <form method="post">
 
 {% csrf_token %}
 
-<label>Username</label>
-<input type="text" name="username">
+<div class="form-group">
 
-<label>Password</label>
-<input type="password" name="password">
+<input type="text" name="username" placeholder="Username" required>
 
-<button type="submit">Login</button>
+</div>
+
+<div class="form-group password-box">
+
+<input type="password" name="password" id="password" placeholder="Password" required>
+
+<span class="toggle-password" onclick="togglePassword('password')">👁</span>
+
+</div>
+
+<button type="submit" class="primary-btn">Login</button>
 
 </form>
 
-{% if form.errors %}
-<p style="color:red;">Invalid username or password</p>
-{% endif %}
+<div class="auth-switch">
+
+<span>Don't have an account?</span>
+
+<a href="/register/" class="secondary-btn-inline">Register</a>
+
+</div>
+
+</div>
+
+</div>
 
 {% endblock %}

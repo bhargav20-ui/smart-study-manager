@@ -2,16 +2,38 @@
 
 {% block content %}
 
-<h2>Edit Task</h2>
+<div style="max-width:600px;margin:40px auto;">
 
-<form method="post">
+<h2 style="margin-bottom:20px;">Profile</h2>
 
-{% csrf_token %}
+<div style="background:white;padding:25px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.05);">
 
-{{ form.as_p }}
+<h3 style="margin-bottom:10px;">{{ user.username }}</h3>
 
-<button type="submit">Update</button>
+<p style="color:#666;margin-bottom:20px;">
+{{ user.email }}
+</p>
 
-</form>
+<hr style="margin-bottom:20px;">
+
+<p><strong>Total Tasks:</strong> {{ total_tasks }}</p>
+
+<p><strong>Completed Tasks:</strong> {{ completed_tasks }}</p>
+
+<p><strong>Progress:</strong> {{ progress }}%</p>
+
+<div style="background:#e5e7eb;height:10px;border-radius:6px;margin-top:10px;margin-bottom:20px;">
+
+<div style="width:{{ progress }}%;background:#2563eb;height:10px;border-radius:6px;"></div>
+
+</div>
+
+<p style="font-size:14px;color:#777;">
+Member since: {{ user.date_joined|date:"F Y" }}
+</p>
+
+</div>
+
+</div>
 
 {% endblock %}

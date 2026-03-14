@@ -2,16 +2,57 @@
 
 {% block content %}
 
-<h2>Register</h2>
+<div class="auth-wrapper">
+
+<div class="auth-card">
+
+<h2>Create Account</h2>
 
 <form method="post">
 
 {% csrf_token %}
 
-{{ form.as_p }}
+<div class="form-group">
+<label style="display:inline-block;width:130px;">Username</label>
+<span style="display:inline-block;width:200px;">{{ form.username }}</span>
+</div>
 
-<button type="submit">Register</button>
+<div class="form-group">
+<label style="display:inline-block;width:130px;">Email Address</label>
+<span style="display:inline-block;width:200px;">{{ form.email }}</span>
+</div>
+
+<div class="form-group password-box">
+<label style="display:inline-block;width:130px;">Password</label>
+<span style="display:inline-block;width:200px;">{{ form.password1 }}</span>
+
+<span class="toggle-password" onclick="togglePassword('id_password1')">👁</span>
+<span id="password-indicator" class="strength-indicator"></span>
+</div>
+
+<div class="form-group">
+<label style="display:inline-block;width:130px;">Confirm Password</label>
+<span style="display:inline-block;width:200px;">{{ form.password2 }}</span>
+</div>
+
+<button type="submit" class="primary-btn">
+Register
+</button>
 
 </form>
+
+<div class="auth-switch">
+
+<span>Already have an account?</span>
+
+<a href="/accounts/login/" class="secondary-btn-inline">
+Login
+</a>
+
+</div>
+
+</div>
+
+</div>
 
 {% endblock %}

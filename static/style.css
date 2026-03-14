@@ -1,37 +1,200 @@
 body{
-font-family:Arial;
-background:#f4f4f4;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+margin:0;
+background:#f5f7fb;
+color:#333;
+padding-bottom:50px;
 }
 
-nav{
-background:#333;
-padding:10px;
-}
+/* NAVBAR */
 
-nav a{
-color:white;
-margin-right:10px;
-text-decoration:none;
-}
-
-.container{
-width:70%;
-margin:auto;
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
 background:white;
-padding:20px;
-margin-top:20px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
-.start-btn{
-display:inline-block;
-margin-top:15px;
-padding:10px 20px;
-background:#007bff;
-color:white;
+
+.logo{
+font-weight:600;
+font-size:18px;
+}
+
+.nav-links{
+display:flex;
+gap:18px;
+align-items:center;
+}
+
+.nav-links a{
 text-decoration:none;
+color:#444;
+font-size:14px;
+}
+
+.logout-btn{
+background:#ef4444;
+border:none;
+padding:6px 12px;
 border-radius:6px;
+color:white;
+cursor:pointer;
+}
+
+/* LANDING PAGE */
+
+.landing{
+text-align:center;
+margin-top:120px;
+}
+
+.landing h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.landing p{
+color:#666;
 font-size:16px;
 }
 
-.start-btn:hover{
-background:#0056b3;
+.landing-buttons{
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+/* AUTH CARD */
+
+.auth-wrapper{
+display:flex;
+justify-content:center;
+align-items:center;
+height:80vh;
+}
+
+.auth-card{
+background:white;
+padding:35px;
+width:360px;
+border-radius:10px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.auth-card h2{
+margin-bottom:20px;
+}
+
+/* FORM */
+
+.form-group{
+margin-bottom:16px;
+}
+
+.form-group input{
+width:100%;
+padding:10px;
+border:1px solid #dcdcdc;
+border-radius:6px;
+font-size:14px;
+}
+
+.form-group input:focus{
+outline:none;
+border-color:#2563eb;
+}
+
+/* PASSWORD */
+
+.password-box{
+position:relative;
+}
+
+.toggle-password{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+font-size:14px;
+}
+
+/* PASSWORD STRENGTH */
+
+.strength-indicator{
+position:absolute;
+right:30px;
+top:50%;
+transform:translateY(-50%);
+width:8px;
+height:8px;
+border-radius:50%;
+background:#ccc;
+}
+
+/* BUTTONS */
+
+.primary-btn{
+background:#2563eb;
+border:none;
+padding:10px;
+width:100%;
+border-radius:6px;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+.primary-btn:hover{
+background:#1d4ed8;
+}
+
+.secondary-btn{
+background:white;
+border:1px solid #2563eb;
+color:#2563eb;
+padding:9px 18px;
+border-radius:6px;
+text-decoration:none;
+}
+
+.secondary-btn:hover{
+background:#2563eb;
+color:white;
+}
+
+.secondary-btn-inline{
+background:#10b981;
+padding:5px 12px;
+border-radius:5px;
+color:white;
+text-decoration:none;
+font-size:13px;
+}
+
+/* SWITCH TEXT */
+
+.auth-switch{
+margin-top:15px;
+font-size:14px;
+color:#555;
+}
+/* FOOTER */
+
+.app-footer{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+border-top:1px solid #e5e7eb;
+text-align:center;
+padding:10px;
+font-size:13px;
+color:#666;
+box-shadow:0 -2px 6px rgba(0,0,0,0.05);
 }
