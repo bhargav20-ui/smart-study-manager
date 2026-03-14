@@ -2,33 +2,45 @@
 
 {% block content %}
 
-<div class="auth-wrapper">
+<div class="auth-container">
 
-<div class="auth-card">
+<div class="card auth-card p-4 shadow">
 
-<h2>Login</h2>
+<h3 class="text-center mb-4">Login</h3>
 
 {% if form.errors %}
-<p style="color:#f87171;text-align:center;">Invalid username or password</p>
+<div class="alert alert-danger">
+Invalid username or password
+</div>
 {% endif %}
 
 <form method="post">
 
 {% csrf_token %}
 
+<div class="mb-3">
+<label class="form-label">Username</label>
 {{ form.username }}
-{{ form.password }}
+</div>
 
-<button class="auth-btn">Login</button>
+<div class="mb-3">
+<label class="form-label">Password</label>
+{{ form.password }}
+</div>
+
+<button class="btn btn-primary w-100">
+Login
+</button>
 
 </form>
 
-<p class="auth-footer">
+<p class="text-center mt-3">
 Don't have an account?
 <a href="/register/">Register</a>
 </p>
 
 </div>
+
 </div>
 
 {% endblock %}

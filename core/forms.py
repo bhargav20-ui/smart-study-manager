@@ -13,18 +13,35 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ["username","email","password1","password2"]
+        fields = ["username", "email", "password1", "password2"]
 
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
+        # remove default help text
         self.fields['password1'].help_text = None
         self.fields['password2'].help_text = None
 
-        for field in self.fields.values():
-            field.widget.attrs.update({
-                "class": "auth-input"
-            })
+        # apply bootstrap classes
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Username'
+        })
+
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Email'
+        })
+
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Password'
+        })
+
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Confirm Password'
+        })
 # ---------------------------
 # Study Task Form
 # ---------------------------
