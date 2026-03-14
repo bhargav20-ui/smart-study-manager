@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="card shadow-sm p-4 mx-auto" style="max-width:500px">
+<div class="card auth-card shadow p-4">
 
 <h3 class="text-center mb-4">Login</h3>
 
@@ -13,10 +13,21 @@ Invalid username or password
 {% endif %}
 
 <form method="post">
+
 {% csrf_token %}
-{{ form.as_p }}
+
+<div class="mb-3">
+<label>Username</label>
+{{ form.username }}
+</div>
+
+<div class="mb-3">
+<label>Password</label>
+{{ form.password }}
+</div>
 
 <button class="btn btn-primary w-100">Login</button>
+
 </form>
 
 <p class="text-center mt-3">

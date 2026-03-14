@@ -2,13 +2,37 @@
 
 {% block content %}
 
-<div class="card shadow-sm p-4 mx-auto" style="max-width:500px">
+<div class="card auth-card shadow p-4">
 
 <h3 class="text-center mb-4">Create Account</h3>
 
-<form method="post">
+<form method="post" onsubmit="return validatePassword()">
+
 {% csrf_token %}
-{{ form.as_p }}
+
+<div class="mb-3">
+<label>Username</label>
+{{ form.username }}
+</div>
+
+<div class="mb-3">
+<label>Email</label>
+{{ form.email }}
+</div>
+
+<div class="mb-3">
+<label>Password</label>
+{{ form.password1 }}
+<div class="progress mt-2" style="height:6px;">
+<div id="strengthBar" class="progress-bar"></div>
+</div>
+<small id="strengthText"></small>
+</div>
+
+<div class="mb-3">
+<label>Confirm Password</label>
+{{ form.password2 }}
+</div>
 
 <button class="btn btn-success w-100">Register</button>
 
@@ -20,5 +44,89 @@ Already have an account?
 </p>
 
 </div>
+
+<script>
+
+const passwordInput = document.getElementById("id_password1");
+const strengthBar = document.getElementById("strengthBar");
+const strengthText = document.getElementById("strengthText");
+
+passwordInput.addEventListener("input", function(){
+
+let password = passwordInput.value;
+let score = 0;
+
+if(password.length >= 8) score++;
+if(/[A-Z]/.test(password)) score++;
+if(/[a-z]/.test(password)) score++;
+if(/[0-9]/.test(password)) score++;
+if(/[!@#$%^&*(),.?":{}|<>]/.test(password)) score++;
+
+if(score <= 2){
+strengthBar.style.width = "33%";
+strengthBar.className = "progress-bar bg-danger";
+strengthText.innerText = "Weak password";
+}
+
+else if(score <= 4){
+strengthBar.style.width = "66%";
+strengthBar.className = "progress-bar bg-warning";
+strengthText.innerText = "Medium strength password";
+}
+
+else{
+strengthBar.style.width = "100%";
+strengthBar.className = "progress-bar bg-success";
+strengthText.innerText = "Strong password";
+}
+
+});
+
+
+function validatePassword(){
+
+let password = document.getElementById("id_password1").value;
+let confirm = document.getElementById("id_password2").value;
+
+let upper = /[A-Z]/;
+let lower = /[a-z]/;
+let number = /[0-9]/;
+let special = /[!@#$%^&*(),.?":{}|<>]/;
+
+if(password.length < 8){
+alert("Password must contain at least 8 characters.");
+return false;
+}
+
+if(!upper.test(password)){
+alert("Password must contain at least one uppercase letter.");
+return false;
+}
+
+if(!lower.test(password)){
+alert("Password must contain at least one lowercase letter.");
+return false;
+}
+
+if(!number.test(password)){
+alert("Password must contain at least one number.");
+return false;
+}
+
+if(!special.test(password)){
+alert("Password must contain at least one special character.");
+return false;
+}
+
+if(password !== confirm){
+alert("Passwords do not match.");
+return false;
+}
+
+return true;
+
+}
+
+</script>
 
 {% endblock %}
