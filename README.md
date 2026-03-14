@@ -4,7 +4,7 @@ Smart Study Manager is a full-stack Django web application designed to help stud
 
 The application allows users to create, manage, and monitor study tasks with authentication, progress tracking, and a clean dashboard interface.
 
-Live Demo: https://your-render-url.onrender.com
+Live Demo: https://smart-study-manager.onrender.com/
 
 ---
 
