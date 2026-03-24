@@ -207,9 +207,3 @@ Production setup includes:
 Bhargav
 
 GitHub: https://github.com/bhargav20-ui
-
----
-
-# License
-
-This project is open-source and available under the MIT License.
