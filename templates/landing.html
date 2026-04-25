@@ -13,13 +13,15 @@ Smart Study Manager helps you focus on what matters most.
 
 <div class="landing-buttons" style="margin-top:30px;">
 
-<a href="/accounts/login/"
+<!-- ✅ FIXED LOGIN BUTTON -->
+<a href="{% url 'login' %}"
 class="primary-btn"
 style="width:auto;padding:10px 22px;">
 Login
 </a>
 
-<a href="/register/"
+<!-- ✅ FIXED REGISTER BUTTON -->
+<a href="{% url 'register' %}"
 class="secondary-btn"
 style="width:auto;padding:10px 22px;">
 Create Account

@@ -12,6 +12,9 @@
 
 <body>
 
+<!-- ==============================
+NAVBAR
+============================== -->
 <nav class="navbar">
 
 <div class="logo">
@@ -20,29 +23,40 @@ Smart Study Manager
 
 <div class="nav-links">
 
-{% if user.is_authenticated %}
+{% if request.path != '/' %}
 
-<a href="/dashboard/">Dashboard</a>
-<a href="/profile/">Profile</a>
+    {% if user.is_authenticated %}
 
-<form method="post" action="{% url 'logout' %}">
-{% csrf_token %}
-<button class="logout-btn">Logout</button>
-</form>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'profile' %}">Profile</a>
 
-{% else %}
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
 
-<a href="/">Home</a>
-<a href="/accounts/login/">Login</a>
-<a href="/register/">Register</a>
+    {% else %}
+
+        <a href="{% url 'landing' %}">Home</a>
+
+        {% if request.path != '/login/' %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+
+        {% if request.path != '/register/' %}
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+
+    {% endif %}
 
 {% endif %}
 
 </div>
 
 </nav>
-
-
+<!-- ==============================
+MESSAGES
+============================== -->
 {% if messages %}
 <div style="text-align:center;margin-top:10px;">
 {% for message in messages %}
@@ -54,64 +68,64 @@ Smart Study Manager
 {% endif %}
 
 
+<!-- ==============================
+MAIN CONTENT
+============================== -->
 {% block content %}
-
 {% endblock %}
 
 
+<!-- ==============================
+SCRIPTS
+============================== -->
 <script>
 
+// Toggle password visibility
 function togglePassword(id){
-
-const field = document.getElementById(id)
-
-if(field.type === "password"){
-field.type = "text"
-}else{
-field.type = "password"
+    const field = document.getElementById(id)
+    if(field){
+        field.type = field.type === "password" ? "text" : "password"
+    }
 }
 
-}
-
-
+// Password strength indicator
 document.addEventListener("input", function(e){
+    if(e.target.id === "id_password1"){
+        const password = e.target.value
+        const indicator = document.getElementById("password-indicator")
 
-if(e.target.id === "id_password1"){
-
-const password = e.target.value
-const indicator = document.getElementById("password-indicator")
-
-if(password.length < 6){
-indicator.style.background = "#ef4444"
-}
-
-else if(password.length < 10){
-indicator.style.background = "#f59e0b"
-}
-
-else{
-indicator.style.background = "#10b981"
-}
-
-}
-
+        if(indicator){
+            if(password.length < 6){
+                indicator.style.background = "#ef4444"
+            } else if(password.length < 10){
+                indicator.style.background = "#f59e0b"
+            } else {
+                indicator.style.background = "#10b981"
+            }
+        }
+    }
 })
 
-
+// Prevent multiple submissions
 document.querySelectorAll("form").forEach(form=>{
-form.addEventListener("submit",()=>{
-const btn = form.querySelector(".primary-btn")
-
-if(btn){
-btn.disabled = true
-btn.innerText = "Processing..."
-}
-})
+    form.addEventListener("submit",()=>{
+        const btn = form.querySelector(".primary-btn")
+        if(btn){
+            btn.disabled = true
+            btn.innerText = "Processing..."
+        }
+    })
 })
 
 </script>
+
+
+<!-- ==============================
+FOOTER
+============================== -->
 <footer class="app-footer">
 © 2026 Smart Study Manager • Built with Django
 </footer>
+
 </body>
 </html>

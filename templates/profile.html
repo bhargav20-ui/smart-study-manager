@@ -2,13 +2,14 @@
 
 {% block content %}
 
-<div style="max-width:600px;margin:40px auto;">
+<div style="max-width:700px;margin:40px auto;">
 
-<h2 style="margin-bottom:20px;">Profile</h2>
+<!-- PROFILE CARD -->
+<div style="background:white;padding:25px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.05);margin-bottom:30px;">
 
-<div style="background:white;padding:25px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+<h2 style="margin-bottom:15px;">Profile</h2>
 
-<h3 style="margin-bottom:10px;">{{ user.username }}</h3>
+<h3 style="margin-bottom:5px;">{{ user.username }}</h3>
 
 <p style="color:#666;margin-bottom:20px;">
 {{ user.email }}
@@ -22,15 +23,43 @@
 
 <p><strong>Progress:</strong> {{ progress }}%</p>
 
+<!-- Progress Bar -->
 <div style="background:#e5e7eb;height:10px;border-radius:6px;margin-top:10px;margin-bottom:20px;">
-
-<div style="width:{{ progress }}%;background:#2563eb;height:10px;border-radius:6px;"></div>
-
+    <div style="width:{{ progress }}%;background:#2563eb;height:10px;border-radius:6px;"></div>
 </div>
 
 <p style="font-size:14px;color:#777;">
 Member since: {{ user.date_joined|date:"F Y" }}
 </p>
+
+</div>
+
+<!-- 🔥 ACTIVITY LOG SECTION -->
+<div style="background:white;padding:20px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+
+<h3 style="margin-bottom:15px;">Recent Activity</h3>
+
+<div>
+
+{% for log in logs %}
+
+<div style="padding:10px 12px;margin-bottom:10px;border-radius:6px;background:#f9fafb;display:flex;justify-content:space-between;align-items:center;">
+
+<span>🔹 {{ log.action }}</span>
+
+<small style="color:#666;">
+{{ log.timestamp|date:"H:i d-m-Y" }}
+</small>
+
+</div>
+
+{% empty %}
+
+<p style="color:#666;">No activity yet</p>
+
+{% endfor %}
+
+</div>
 
 </div>
 
